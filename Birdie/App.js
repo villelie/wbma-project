@@ -1,10 +1,12 @@
+// App.js
+/* eslint-disable react/display-name */
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Danin koodi!</Text>
     </View>
   );
 };
