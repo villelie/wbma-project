@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "Birdie",
+    "name": "Birdie",
+    "slug": "birdie",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -23,8 +23,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "androidStatusBar": {
+      "backgroundColor": "#4FA345"
+    },
+	"android": {
+      "package": "com.yourcompany.yourappname",
+      "versionCode": 1
     }
   }
 }
