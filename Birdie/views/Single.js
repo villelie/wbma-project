@@ -14,13 +14,17 @@ const Single = (props) => {
     const {navigation} = props;
     const [owner, setOwner] = useState({});
     const file = navigation.state.params.file;
+    const allData = JSON.parse(file.description);
+    const desc = allData.description;
+    const rari = allData.rarity;
+    const loca = allData.location;
     const getOwner = async () => {
         const data = await getUser(file.user_id);
         setOwner(data);
     };
     useEffect(() => {
         getOwner();
-    })
+    });
     return (
         <Container>
             <Content>
@@ -61,7 +65,12 @@ const Single = (props) => {
                     </CardItem>
                     <CardItem>
                         <Body>
-                            <Text>{file.description}</Text>
+                            <Text note>Description:</Text>
+                            <Text> {desc}</Text>
+                            <Text note>Rarity:</Text>
+                            <Text> {rari}</Text>
+                            <Text note>Location:</Text>
+                            <Text> {loca}</Text>
                         </Body>
                     </CardItem>
                 </Card>

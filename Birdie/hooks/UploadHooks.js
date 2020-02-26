@@ -21,6 +21,20 @@ const useUploadForm = () => {
                 description: text,
             }));
     };
+    const handleRarityChange = (text) => {
+        setInputs((inputs) =>
+            ({
+                ...inputs,
+                rarity: text,
+            }));
+    };
+    const handleLocationChange = (text) => {
+        setInputs((inputs) =>
+            ({
+                ...inputs,
+                location: text,
+            }));
+    };
     const handleUpload = async (file, navigation) => {
         const filename = file.uri.split('/').pop();
         const match = /\.(\w+)$/.exec(filename);
@@ -31,9 +45,14 @@ const useUploadForm = () => {
         } else {
             type = match ? `video/${match[1]}` : 'video';
         }
+        const moreData = {
+            description: inputs.description,
+            rarity: inputs.rarity,
+            location: inputs.location,
+        };
         const fd = new FormData();
         fd.append('title', inputs.title);
-        fd.append('description', inputs.description);
+        fd.append('description', JSON.stringify(moreData));
         fd.append('file', {uri: file.uri, name: filename, type});
         console.log('FD:', fd);
         try {
@@ -72,6 +91,8 @@ const useUploadForm = () => {
     return {
         handleTitleChange,
         handleDescriptionChange,
+        handleRarityChange,
+        handleLocationChange,
         handleUpload,
         inputs,
         errors,

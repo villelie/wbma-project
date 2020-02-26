@@ -12,7 +12,7 @@ const deviceHeight = Dimensions.get('window').height;
 
 const Upload = (props) => {
     const [image, setImage] = useState(null);
-    const {handleTitleChange, handleDescriptionChange, handleUpload, inputs} = useUploadForm();
+    const {handleTitleChange, handleDescriptionChange, handleRarityChange, handleLocationChange, handleUpload, inputs} = useUploadForm();
     useEffect(() => {
         getPermissionAsync();
     }, []);
@@ -52,6 +52,20 @@ const Upload = (props) => {
                         value={inputs.description}
                         placeholder='description'
                         onChangeText={handleDescriptionChange}
+                    />
+                </Item>
+                <Item>
+                    <FormTextInput
+                        value={inputs.rarity}
+                        placeholder='rarity'
+                        onChangeText={handleRarityChange}
+                    />
+                </Item>
+                <Item>
+                    <FormTextInput
+                        value={inputs.location}
+                        placeholder='location'
+                        onChangeText={handleLocationChange}
                     />
                 </Item>
                 {image &&
