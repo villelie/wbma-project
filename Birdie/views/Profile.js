@@ -60,7 +60,7 @@ const Profile = (props) => {
                             <Text>Email: {user.userdata.email}</Text>
                         </Body>
                     </CardItem>
-                    <Button full warning onPress={() => {props.navigation.push('MyFiles')}}>
+                    <Button warning onPress={() => {props.navigation.push('MyFiles')}}>
                         <Text>MyFiles</Text>
                     </Button>
                     <Button full onPress={signOutAsync}>

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, {useState, useEffect} from 'react';
-import {Content, Form, Item, Button, Body, Text} from 'native-base';
+import {Content, Form, Item, Button, Body, Text, Picker, Icon} from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -12,6 +12,11 @@ const deviceHeight = Dimensions.get('window').height;
 
 const Upload = (props) => {
     const [image, setImage] = useState(null);
+    const [picker, setPicker] = useState('Least concern');
+    const handlePicked = (value) => {
+        handleRarityChange(value);
+        setPicker(value);
+    };
     const {handleTitleChange, handleDescriptionChange, handleRarityChange, handleLocationChange, handleUpload, inputs} = useUploadForm();
     useEffect(() => {
         getPermissionAsync();
@@ -54,12 +59,21 @@ const Upload = (props) => {
                         onChangeText={handleDescriptionChange}
                     />
                 </Item>
-                <Item>
-                    <FormTextInput
-                        value={inputs.rarity}
-                        placeholder='rarity'
-                        onChangeText={handleRarityChange}
-                    />
+                <Item picker>
+                    <Picker
+                        mode="dropdown"
+                        iosIcon={<Icon name="arrow-down" />}
+                        style={{width: undefined}}
+                        placeholder="Rarity"
+                        placeholderStyle={{color: "#bfc6ea"}}
+                        placeholderIconColor="#007aff"
+                        selectedValue={picker}
+                        onValueChange={handlePicked.bind(this)}>
+                        <Picker.Item label="Least concern" value="Least concern" />
+                        <Picker.Item label="Near threatened" value="Near threatened" />
+                        <Picker.Item label="Vulnerable" value="Vulnerable" />
+                        <Picker.Item label="Endangered" value="Endangered" />
+                    </Picker>
                 </Item>
                 <Item>
                     <FormTextInput

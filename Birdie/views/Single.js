@@ -66,11 +66,11 @@ const Single = (props) => {
                     <CardItem>
                         <Body>
                             <Text note>Description:</Text>
-                            <Text> {desc}</Text>
+                            <Text>{desc}</Text>
                             <Text note>Rarity:</Text>
-                            <Text> {rari}</Text>
+                            <Text>{rari}</Text>
                             <Text note>Location:</Text>
-                            <Text> {loca}</Text>
+                            <Text>{loca}</Text>
                         </Body>
                     </CardItem>
                 </Card>
