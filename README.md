@@ -1,3 +1,3 @@
 # Birdie
 ## WBMA-Project
-This is fine.
+run ´´´npm i´´´
