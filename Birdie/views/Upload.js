@@ -17,10 +17,25 @@ const Upload = (props) => {
         handleRarityChange(value);
         setPicker(value);
     };
-    const {handleTitleChange, handleDescriptionChange, handleRarityChange, handleLocationChange, handleUpload, inputs} = useUploadForm();
+    const {validateField, errors, validateOnSend, handleTitleChange, handleDescriptionChange, handleRarityChange, handleLocationChange, handleUpload, inputs} = useUploadForm();
     useEffect(() => {
         getPermissionAsync();
     }, []);
+
+    const validationProperties = {
+        title: {title: inputs.title},
+        description: {description: inputs.description},
+        };
+
+    const uploadAsync = async (file, navigation) => {
+        const upValid = validateOnSend(validationProperties);
+        console.log('upload errors', errors);
+        if (!upValid) {
+          return;
+        }
+        handleUpload(file, navigation);
+    };
+    
     const getPermissionAsync = async () => {
         if (Constants.platform.ios) {
             const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -50,6 +65,10 @@ const Upload = (props) => {
                         value={inputs.title}
                         placeholder='title'
                         onChangeText={handleTitleChange}
+                        onEndEditing={() => {
+                            validateField(validationProperties.title);
+                          }}
+                          error={errors.title}
                     />
                 </Item>
                 <Item>
@@ -57,6 +76,10 @@ const Upload = (props) => {
                         value={inputs.description}
                         placeholder='description'
                         onChangeText={handleDescriptionChange}
+                        onEndEditing={() => {
+                            validateField(validationProperties.description);
+                          }}
+                          error={errors.description}
                     />
                 </Item>
                 <Item picker>
@@ -80,6 +103,10 @@ const Upload = (props) => {
                         value={inputs.location}
                         placeholder='location'
                         onChangeText={handleLocationChange}
+                        onEndEditing={() => {
+                            validateField(validationProperties.location);
+                          }}
+                          error={errors.location}
                     />
                 </Item>
                 {image &&
@@ -90,12 +117,21 @@ const Upload = (props) => {
                         <Text>Choose file</Text>
                     </Button>
                     <Button full onPress={() => {
-                        handleUpload(image, props.navigation);
+                        uploadAsync(image, props.navigation);
                     }}>
                         <Text>Upload</Text>
                     </Button>
                 </Body>
             </Form>
+            {errors.fetch &&
+          <Card>
+            <CardItem>
+              <Body>
+                <Text>{errors.fetch}</Text>
+              </Body>
+            </CardItem>
+          </Card>
+        }
         </Content>
     );
 }

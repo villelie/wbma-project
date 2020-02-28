@@ -1,7 +1,25 @@
 import {useState, useContext} from 'react';
 import {AsyncStorage} from 'react-native';
+import validate from 'validate.js';
 import {fetchGET, fetchPOST} from './APIHooks';
 import {MediaContext} from '../contexts/MediaContext';
+
+const constraints = {
+    title: {
+        presence: {
+            message: 'cannot be blank.',
+        },
+        length: {
+            minimum: 3,
+            message: 'must be at least 3 characters',
+        },
+    },
+    description: {
+        presence: {
+            message: 'cannot be blank.',
+        },
+    },
+}
 
 const useUploadForm = () => {
     const [media, setMedia] = useContext(MediaContext);
@@ -35,7 +53,26 @@ const useUploadForm = () => {
                 location: text,
             }));
     };
+    
+    const validateField = (attr) => {
+        const copy = { ...attr };
+        const attrName = Object.keys(copy).pop(); // get the only or last item from array
+        const valResult = validate(copy, constraints);
+        console.log('valresult', valResult);
+        let valid = undefined;
+        if (valResult[attrName]) {
+            valid = valResult[attrName][0]; // get just the first message
+        }
+        setErrors((errors) =>
+            ({
+                ...errors,
+                [attrName]: valid,
+                fetch: undefined,
+            }));
+    };
+    
     const handleUpload = async (file, navigation) => {
+
         const filename = file.uri.split('/').pop();
         const match = /\.(\w+)$/.exec(filename);
         let type = match ? `image/${match[1]}` : `image`;
@@ -88,7 +125,24 @@ const useUploadForm = () => {
             console.log(e.message);
         }
     };
+
+    const validateOnSend = (fields) => {
+        for (const [key, value] of Object.entries(fields)) {
+            console.log(key, value);
+            validateField(value);
+        }
+
+        if (errors.title !== undefined ||
+            errors.description !== undefined 
+            ) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
     return {
+        validateOnSend,
         handleTitleChange,
         handleDescriptionChange,
         handleRarityChange,
@@ -97,6 +151,7 @@ const useUploadForm = () => {
         inputs,
         errors,
         setErrors,
+        validateField
     };
 };
 

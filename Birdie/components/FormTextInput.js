@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Item, Badge, Body} from 'native-base';
+import {Input, Item, Text, Badge, Body} from 'native-base';
 import PropTypes from 'prop-types';
 
 
