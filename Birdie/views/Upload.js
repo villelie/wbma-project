@@ -63,7 +63,7 @@ const Upload = (props) => {
                 <Item>
                     <FormTextInput
                         value={inputs.title}
-                        placeholder='title'
+                        placeholder='Name of the bird'
                         onChangeText={handleTitleChange}
                         onEndEditing={() => {
                             validateField(validationProperties.title);
@@ -74,7 +74,7 @@ const Upload = (props) => {
                 <Item>
                     <FormTextInput
                         value={inputs.description}
-                        placeholder='description'
+                        placeholder='Description'
                         onChangeText={handleDescriptionChange}
                         onEndEditing={() => {
                             validateField(validationProperties.description);
@@ -87,7 +87,7 @@ const Upload = (props) => {
                         mode="dropdown"
                         iosIcon={<Icon name="arrow-down" />}
                         style={{width: undefined}}
-                        placeholder="Rarity"
+                        placeholder="Rarity of the bird"
                         placeholderStyle={{color: "#bfc6ea"}}
                         placeholderIconColor="#007aff"
                         selectedValue={picker}
@@ -101,7 +101,7 @@ const Upload = (props) => {
                 <Item>
                     <FormTextInput
                         value={inputs.location}
-                        placeholder='location'
+                        placeholder='Location (area/city/zip)'
                         onChangeText={handleLocationChange}
                         onEndEditing={() => {
                             validateField(validationProperties.location);

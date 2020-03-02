@@ -8,9 +8,9 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListItem = (props) => {
     const allData = JSON.parse(props.singleMedia.description);
-    const desc = allData.description;
-    //const rari = allData.rarity;
-    //const loca = allData.location;
+    //const desc = allData.description;
+    const rari = allData.rarity;
+    const loca = allData.location;
     return (
         <BaseListItem thumbnail>
             <Left>
@@ -18,7 +18,7 @@ const ListItem = (props) => {
             </Left>
             <Body>
                 <Text>{props.singleMedia.title}</Text>
-                <Text note numberOfLines={1}>{desc}</Text>
+                <Text note numberOfLines={1}>{rari + ', ' + loca}</Text>
             </Body>
             <Right>
                 <Button full info onPress={() => {
