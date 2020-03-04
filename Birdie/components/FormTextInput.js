@@ -19,7 +19,7 @@ const FormTextInput = (props) => {
 
 FormTextInput.propTypes = {
     success: PropTypes.bool,
-    error: PropTypes.bool,
+    error: PropTypes.any,
 };
 
 export default FormTextInput;
