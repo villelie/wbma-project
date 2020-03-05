@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, {useState, useEffect} from 'react';
-import {Content, Form, Item, Label, Button, Body, Text, Picker, Icon} from 'native-base';
+import {Content, Form, Item, Label, Button, Body, Text, Picker, Icon, Card, Header, Title, Subtitle, Right} from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -12,8 +12,8 @@ const deviceHeight = Dimensions.get('window').height;
 
 const Upload = (props) => {
     const [image, setImage] = useState(null);
-    const [sexPick, setSexPicker] = useState('Male');
-    const [rarityPick, setRarityPicker] = useState('Least concern');
+    const [sexPick, setSexPicker] = useState('Unknown');
+    const [rarityPick, setRarityPicker] = useState('Unknown');
     const handleSexPicked = (value) => {
         handleSexChange(value);
         setSexPicker(value);
@@ -62,97 +62,111 @@ const Upload = (props) => {
         }
     };
     return (
-        <Content style={{backgroundColor: '#d9f7b0'}}>
-            <Form>
-                <Item stackedLabel>
-                    <Label>Username</Label>
-                    <FormTextInput
-                        value={inputs.title}
-                        placeholder='Name of the bird'
-                        onChangeText={handleTitleChange}
-                        onEndEditing={() => {
-                            validateField(validationProperties.title);
-                        }}
-                        error={errors.title}
-                    />
-                </Item>
-                <Item stackedLabel>
-                    <Label>Description</Label>
-                    <FormTextInput
-                        value={inputs.description}
-                        placeholder='Description'
-                        onChangeText={handleDescriptionChange}
-                        onEndEditing={() => {
-                            validateField(validationProperties.description);
-                        }}
-                        error={errors.description}
-                    />
-                </Item>
-                <Item picker>
-                    <Picker
-                        mode="dropdown"
-                        iosIcon={<Icon name="arrow-down" />}
-                        style={{width: undefined}}
-                        placeholderStyle={{color: "#bfc6ea"}}
-                        placeholderIconColor="#007aff"
-                        selectedValue={sexPick}
-                        onValueChange={handleSexPicked.bind(this)}>
-                        <Picker.Item label="Male" value="Male" />
-                        <Picker.Item label="Female" value="Female" />
-                        <Picker.Item label="Unknown" value="Unknown" />
-                    </Picker>
-                </Item>
-                <Item picker>
-                    <Picker
-                        mode="dropdown"
-                        iosIcon={<Icon name="arrow-down" />}
-                        style={{width: undefined}}
-                        placeholderStyle={{color: "#bfc6ea"}}
-                        placeholderIconColor="#007aff"
-                        selectedValue={rarityPick}
-                        onValueChange={handleRarityPicked.bind(this)}>
-                        <Picker.Item label="Least concern" value="Least concern" />
-                        <Picker.Item label="Near threatened" value="Near threatened" />
-                        <Picker.Item label="Vulnerable" value="Vulnerable" />
-                        <Picker.Item label="Endangered" value="Endangered" />
-                    </Picker>
-                </Item>
-                <Item stackedLabel last>
-                    <Label>Location</Label>
-                    <FormTextInput
-                        value={inputs.location}
-                        placeholder='Location (area/city/zip)'
-                        onChangeText={handleLocationChange}
-                        onEndEditing={() => {
-                            validateField(validationProperties.location);
-                        }}
-                        error={errors.location}
-                    />
-                </Item>
-                {image &&
-                    <Image source={{uri: image.uri}} style={{width: '100%', height: deviceHeight * 0.3}}></Image>
-                }
+        <>
+            <Header noLeft style={{backgroundColor: '#4FA345'}} androidStatusBarColor >
                 <Body>
-                    <Button transparent onPress={pickImage}>
-                        <Text>Choose file</Text>
-                    </Button>
-                    <Button full onPress={() => {
-                        uploadAsync(image, props.navigation);
-                    }}>
-                        <Text>Upload</Text>
-                    </Button>
+                    <Title>Upload</Title>
+                    <Subtitle>Birdie</Subtitle>
                 </Body>
-            </Form>
-            {errors.fetch &&
+                <Right />
+            </Header>
+            <Content style={{backgroundColor: '#d9f7b0'}}>
                 <Card>
-                    <CardItem>
-                        <Body>
-                            <Text>{errors.fetch}</Text>
-                        </Body>
-                    </CardItem>
+                    <Form>
+                        <Item stackedLabel>
+                            <Label>Username</Label>
+                            <FormTextInput
+                                value={inputs.title}
+                                placeholder='Name of the bird'
+                                onChangeText={handleTitleChange}
+                                onEndEditing={() => {
+                                    validateField(validationProperties.title);
+                                }}
+                                error={errors.title}
+                            />
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>Description</Label>
+                            <FormTextInput
+                                value={inputs.description}
+                                placeholder='Description'
+                                onChangeText={handleDescriptionChange}
+                                onEndEditing={() => {
+                                    validateField(validationProperties.description);
+                                }}
+                                error={errors.description}
+                            />
+                        </Item>
+                        <Item picker>
+                            <Text>    Gender:</Text>
+                            <Picker
+                                mode="dropdown"
+                                iosIcon={<Icon name="arrow-down" />}
+                                style={{width: undefined}}
+                                placeholderStyle={{color: "#bfc6ea"}}
+                                placeholderIconColor="#007aff"
+                                selectedValue={sexPick}
+                                onValueChange={handleSexPicked.bind(this)}>
+                                <Picker.Item label="Unknown" value="Unknown" />
+                                <Picker.Item label="Female" value="Female" />
+                                <Picker.Item label="Male" value="Male" />
+                            </Picker>
+                        </Item>
+                        <Item picker>
+                            <Text>    Conservation status:</Text>
+                            <Picker
+                                mode="dropdown"
+                                iosIcon={<Icon name="arrow-down" />}
+                                style={{width: undefined}}
+                                placeholderStyle={{color: "#bfc6ea"}}
+                                placeholderIconColor="#007aff"
+                                selectedValue={rarityPick}
+                                onValueChange={handleRarityPicked.bind(this)}>
+                                <Picker.Item label="Unknown" value="Unknown" />
+                                <Picker.Item label="Least concern" value="Least concern" />
+                                <Picker.Item label="Near threatened" value="Near threatened" />
+                                <Picker.Item label="Vulnerable" value="Vulnerable" />
+                                <Picker.Item label="Endangered" value="Endangered" />
+                            </Picker>
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>Location</Label>
+                            <FormTextInput
+                                value={inputs.location}
+                                placeholder='Location (area/city/zip)'
+                                onChangeText={handleLocationChange}
+                                onEndEditing={() => {
+                                    validateField(validationProperties.location);
+                                }}
+                                error={errors.location}
+                            />
+                        </Item>
+                        {image &&
+                            <Image source={{uri: image.uri}} style={{width: '100%', height: deviceHeight * 0.3}}></Image>
+                        }
+
+                        <Button full warning onPress={pickImage}>
+                            <Text>Choose file</Text>
+                        </Button>
+                        <Button full success onPress={() => {
+                            uploadAsync(image, props.navigation);
+                        }}>
+                            <Text>Upload</Text>
+                        </Button>
+
+                    </Form>
                 </Card>
-            }
-        </Content>
+                {errors.fetch &&
+                    <Card>
+                        <CardItem>
+                            <Body>
+                                <Text>{errors.fetch}</Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+                }
+            </Content>
+        </>
     );
 }
 

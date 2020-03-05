@@ -35,12 +35,15 @@ const TabNavigator = createBottomTabNavigator(
                 return <Icon
                     name={iconName}
                     size={25}
+                    color={'white'}
                 />;
             },
         }),
         tabBarOptions: {
             activeTintColor: 'black',
-            activeBackgroundColor: '#b0e5f7',
+            inactiveTintColor: 'white',
+            activeBackgroundColor: 'white',
+            inactiveBackgroundColor: '#4FA345',
         },
     },
 );
@@ -58,17 +61,26 @@ const StackNavigator = createStackNavigator(
         Home: {
             screen: TabNavigator,
             navigationOptions: {
-                headerMode: 'none',
+                headerShown: false
             },
         },
         Single: {
             screen: Single,
+            navigationOptions: {
+                headerShown: false
+            },
         },
         Modify: {
             screen: Modify,
+            navigationOptions: {
+                headerShown: false
+            },
         },
         MyFiles: {
             screen: MyFiles,
+            navigationOptions: {
+                headerShown: false
+            },
         },
         Logout: {
             screen: Login,

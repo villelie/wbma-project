@@ -11,8 +11,8 @@ import {
   Button,
   Icon
 } from "native-base";
-import { AsyncStorage, StyleSheet } from "react-native";
-import { fetchDEL } from "../hooks/APIHooks";
+import {AsyncStorage, StyleSheet} from "react-native";
+import {fetchDEL} from "../hooks/APIHooks";
 
 const mediaUrl = "http://media.mw.metropolia.fi/wbma/uploads/";
 
@@ -23,15 +23,15 @@ const ListItem = props => {
   const loca = allData.location;
   return (
     <BaseListItem noBorder
-      style={{ backgroundColor: "#d9f7b0" }}
+      style={{}}
       thumbnail
       onPress={() => {
-        props.navigation.push("Single", { file: props.singleMedia });
+        props.navigation.push("Single", {file: props.singleMedia});
       }}
     >
-      <Left style={{ flexDirection: "row" }}>
+      <Left style={{flexDirection: "row"}}>
         {props.mode === "user" && (
-          <View style={{ flexDirection: "column" }}>
+          <View style={{flexDirection: "column"}}>
             <Button
               full
               danger
@@ -54,7 +54,7 @@ const ListItem = props => {
               full
               warning
               onPress={() => {
-                props.navigation.push("Modify", { file: props.singleMedia });
+                props.navigation.push("Modify", {file: props.singleMedia});
               }}
             >
               <Icon name="ios-color-wand" />
@@ -63,17 +63,17 @@ const ListItem = props => {
         )}
       </Left>
       <Body>
-        <Text style={{ fontWeight: "bold", fontSize: 25 }}>
+        <Text style={{fontWeight: "bold", fontSize: 25}}>
           {props.singleMedia.title}
         </Text>
-        <Text style={{ fontSize: 20 }} note numberOfLines={1}>
+        <Text style={{fontSize: 20}} note numberOfLines={1}>
           {rari + ", " + loca}
         </Text>
       </Body>
       <Right>
         <Thumbnail
           square
-          source={{ uri: mediaUrl + props.singleMedia.thumbnails.w160 }}
+          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
           style={styles.thumb}
         />
       </Right>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 1,
     borderColor: "black",
-    
+
   }
 });
 

@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
-import {Container, Content, Card, CardItem, Text, Button, Icon, Body} from 'native-base';
+import {Container, Content, Card, CardItem, Text, Button, Icon, Body, Header, Title, Subtitle, Right, } from 'native-base';
 import {fetchGET} from '../hooks/APIHooks';
 //import AsyncImage from '../components/AsyncImage';
 
@@ -35,16 +35,24 @@ const Profile = (props) => {
         props.navigation.navigate('Auth');
     };
     return (
-        <Container style={{backgroundColor: '#d9f7b0'}}>
-            <Content>
-                <Card>
-                    <CardItem>
-                        <Icon name='person' />
-                        <Body>
-                            <Text>{user.userdata.username}</Text>
-                        </Body>
-                    </CardItem>
-                    {/*
+        <>
+            <Header noLeft style={{backgroundColor: '#4FA345'}} androidStatusBarColor >
+                <Body>
+                    <Title>Profile</Title>
+                    <Subtitle>Birdie</Subtitle>
+                </Body>
+                <Right />
+            </Header>
+            <Container style={{backgroundColor: '#d9f7b0'}}>
+                <Content>
+                    <Card>
+                        <CardItem>
+                            <Icon name='person' />
+                            <Body>
+                                <Text>{user.userdata.username}</Text>
+                            </Body>
+                        </CardItem>
+                        {/*
                     <CardItem cardBody>
                         <AsyncImage
                             style={{
@@ -56,22 +64,23 @@ const Profile = (props) => {
                         />
                     </CardItem>
                     */}
-                    <CardItem>
-                        <Body>
-                            <Text>Id: {user.userdata.user_id}</Text>
-                            <Text>Full name: {user.userdata.full_name}</Text>
-                            <Text>Email: {user.userdata.email}</Text>
-                        </Body>
-                    </CardItem>
-                    <Button warning onPress={() => {props.navigation.push('MyFiles')}}>
-                        <Text>MyFiles</Text>
-                    </Button>
-                    <Button full onPress={signOutAsync}>
-                        <Text>Sign out</Text>
-                    </Button>
-                </Card>
-            </Content>
-        </Container>
+                        <CardItem>
+                            <Body>
+                                <Text>Id: {user.userdata.user_id}</Text>
+                                <Text>Full name: {user.userdata.full_name}</Text>
+                                <Text>Email: {user.userdata.email}</Text>
+                            </Body>
+                        </CardItem>
+                        <Button full warning onPress={() => {props.navigation.push('MyFiles')}}>
+                            <Text>My Files</Text>
+                        </Button>
+                        <Button full success onPress={signOutAsync}>
+                            <Text>Sign out</Text>
+                        </Button>
+                    </Card>
+                </Content>
+            </Container>
+        </>
     );
 };
 

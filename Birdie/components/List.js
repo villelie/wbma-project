@@ -31,36 +31,6 @@ const List = props => {
     getMedia(props.mode);
   }, []);
 
-<<<<<<< HEAD
-  return (
-    <View style={{ backgroundColor: "#d9f7b0" }}>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <Card>
-          <BaseList
-            dataArray={media}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <ListItem
-                navigation={props.navigation}
-                singleMedia={item}
-                mode={props.mode}
-              />
-            )}
-          />
-        </Card>
-      )}
-      <NavigationEvents
-        onDidBlur={() => {
-          if (props.mode !== "all") {
-            getMedia("all");
-          }
-        }}
-      />
-    </View>
-  );
-=======
     return (
         <View style={{ backgroundColor: "#d9f7b0"}}>
             {loading ? (
@@ -85,7 +55,6 @@ const List = props => {
             }} />
         </View>
     );
->>>>>>> 7d5be7b7fdc48853d0d589833e83ab2d699a28a8
 };
 
 List.propTypes = {
