@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
-    List as BaseList, Spinner, View,
+    List as BaseList, Spinner, View, Card,
 } from 'native-base';
 import ListItem from './ListItem';
 import {MediaContext} from '../contexts/MediaContext';
@@ -38,15 +38,17 @@ const List = (props) => {
             {loading ? (
                 <Spinner />
             ) : (
-                    <BaseList
-                        dataArray={media}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({item}) => <ListItem
-                            navigation={props.navigation}
-                            singleMedia={item}
-                            mode={props.mode}
-                        />}
-                    />
+                    <Card>
+                        <BaseList
+                            dataArray={media}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({item}) => <ListItem
+                                navigation={props.navigation}
+                                singleMedia={item}
+                                mode={props.mode}
+                            />}
+                        />
+                    </Card>
                 )}
             <NavigationEvents onDidBlur={() => {
                 if (props.mode !== 'all') {
