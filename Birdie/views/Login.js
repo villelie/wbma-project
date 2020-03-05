@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
 import {fetchGET, fetchPOST} from '../hooks/APIHooks';
 import useSignUpForm from '../hooks/LoginHooks';
-import {Container, Content, Form, Item, Text, Button, Title, Body, H2, Card, CardItem} from 'native-base';
+import {Container, Header, Content, Form, Item, Label, Text, Button, Title, Body, H2, Card, CardItem} from 'native-base';
 
 
 
@@ -82,114 +82,118 @@ const Login = (props) => {
       <Content>
         {/* login form */}
         {toggleForm &&
-          <Form>
+          <>
             <Title>
-              <H2>Login</H2>
+              <H2>Sign in!</H2>
             </Title>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.username}
-                placeholder='Username'
-                onChangeText={handleUsernameChange}
-              />
-            </Item>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.password}
-                placeholder='Password'
-                secureTextEntry={true}
-                onChangeText={handlePasswordChange}
-              />
-            </Item>
-            <Button full onPress={signInAsync}><Text>Sign in!</Text></Button>
-            <Button transparent full onPress={() => {
-              setToggleForm(false);
-            }}>
-              <Text>Dont have account? Sign up!</Text>
-            </Button>
-          </Form>
+            <Form>
+              <Item stackedLabel>
+                <Label>Username</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.username}
+                  onChangeText={handleUsernameChange}
+                />
+              </Item>
+              <Item stackedLabel last>
+                <Label>Password</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.password}
+                  secureTextEntry={true}
+                  onChangeText={handlePasswordChange}
+                />
+              </Item>
+              <Button full onPress={signInAsync}><Text>Sign in!</Text></Button>
+              <Button transparent full onPress={() => {
+                setToggleForm(false);
+              }}>
+                <Text>Dont have account? Sign up!</Text>
+              </Button>
+            </Form>
+          </>
         }
 
         {/* register form */}
         {!toggleForm &&
-          <Form>
+          <>
             <Title>
-              <H2>Register</H2>
+              <H2>Sign up!</H2>
             </Title>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.username}
-                placeholder='Username'
-                onChangeText={handleUsernameChange}
-                onEndEditing={() => {
-                  checkAvail();
-                  validateField(validationProperties.username);
-                }}
-                error={errors.username}
-              />
-            </Item>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.email}
-                placeholder='Email'
-                onChangeText={handleEmailChange}
-                onEndEditing={() => {
-                  validateField(validationProperties.email);
-                }}
-                error={errors.email}
-              />
-            </Item>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.full_name}
-                placeholder='Full name'
-                onChangeText={handleFullnameChange}
-                onEndEditing={() => {
-                  validateField(validationProperties.full_name);
-                }}
-                error={errors.full_name}
-              />
-            </Item>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.password}
-                placeholder='Password'
-                secureTextEntry={true}
-                onChangeText={handlePasswordChange}
-                onEndEditing={() => {
-                  validateField(validationProperties.password);
-                }}
-                error={errors.password}
-              />
-            </Item>
-            <Item>
-              <FormTextInput
-                autoCapitalize='none'
-                value={inputs.confirmPassword}
-                placeholder='Confirm password'
-                secureTextEntry={true}
-                onChangeText={handleConfirmPasswordChange}
-                onEndEditing={() => {
-                  validateField(validationProperties.confirmPassword);
-                }}
-                error={errors.confirmPassword}
-              />
-            </Item>
-            <Button full onPress={registerAsync}>
-              <Text>Register!</Text>
-            </Button>
-            <Button transparent full onPress={() => {
-              setToggleForm(true);
-            }}>
-              <Text>Do you have account already? Sign in!</Text>
-            </Button>
-          </Form>
+            <Form>
+              <Item stackedLabel>
+                <Label>Username</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.username}
+                  onChangeText={handleUsernameChange}
+                  onEndEditing={() => {
+                    checkAvail();
+                    validateField(validationProperties.username);
+                  }}
+                  error={errors.username}
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Email</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.email}
+                  onChangeText={handleEmailChange}
+                  onEndEditing={() => {
+                    validateField(validationProperties.email);
+                  }}
+                  error={errors.email}
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Full name</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.full_name}
+                  onChangeText={handleFullnameChange}
+                  onEndEditing={() => {
+                    validateField(validationProperties.full_name);
+                  }}
+                  error={errors.full_name}
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Password</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.password}
+                  secureTextEntry={true}
+                  onChangeText={handlePasswordChange}
+                  onEndEditing={() => {
+                    validateField(validationProperties.password);
+                  }}
+                  error={errors.password}
+                />
+              </Item>
+              <Item stackedLabel last>
+                <Label>Confirm password</Label>
+                <FormTextInput
+                  autoCapitalize='none'
+                  value={inputs.confirmPassword}
+                  secureTextEntry={true}
+                  onChangeText={handleConfirmPasswordChange}
+                  onEndEditing={() => {
+                    validateField(validationProperties.confirmPassword);
+                  }}
+                  error={errors.confirmPassword}
+                />
+              </Item>
+              <Button full onPress={registerAsync}>
+                <Text>Register!</Text>
+              </Button>
+              <Button transparent full onPress={() => {
+                setToggleForm(true);
+              }}>
+                <Text>Do you have account already? Sign in!</Text>
+              </Button>
+            </Form>
+          </>
         }
         {errors.fetch &&
           <Card>
