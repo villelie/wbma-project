@@ -14,7 +14,7 @@ const ListItem = (props) => {
     const loca = allData.location;
 
     return (
-        <BaseListItem thumbnail >
+        <BaseListItem style={{ backgroundColor: "#d9f7b0",}}thumbnail >
             <Left>
                 <Thumbnail square source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}} />
             </Left>
