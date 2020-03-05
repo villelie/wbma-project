@@ -39,6 +39,13 @@ const useUploadForm = () => {
                 description: text,
             }));
     };
+    const handleSexChange = (text) => {
+        setInputs((inputs) =>
+            ({
+                ...inputs,
+                sex: text,
+            }));
+    };
     const handleRarityChange = (text) => {
         setInputs((inputs) =>
             ({
@@ -53,9 +60,9 @@ const useUploadForm = () => {
                 location: text,
             }));
     };
-    
+
     const validateField = (attr) => {
-        const copy = { ...attr };
+        const copy = {...attr};
         const attrName = Object.keys(copy).pop(); // get the only or last item from array
         const valResult = validate(copy, constraints);
         console.log('valresult', valResult);
@@ -70,7 +77,7 @@ const useUploadForm = () => {
                 fetch: undefined,
             }));
     };
-    
+
     const handleUpload = async (file, navigation) => {
 
         const filename = file.uri.split('/').pop();
@@ -84,6 +91,7 @@ const useUploadForm = () => {
         }
         const moreData = {
             description: inputs.description,
+            sex: inputs.sex,
             rarity: inputs.rarity,
             location: inputs.location,
         };
@@ -133,8 +141,8 @@ const useUploadForm = () => {
         }
 
         if (errors.title !== undefined ||
-            errors.description !== undefined 
-            ) {
+            errors.description !== undefined
+        ) {
             return false;
         } else {
             return true;
@@ -145,6 +153,7 @@ const useUploadForm = () => {
         validateOnSend,
         handleTitleChange,
         handleDescriptionChange,
+        handleSexChange,
         handleRarityChange,
         handleLocationChange,
         handleUpload,
