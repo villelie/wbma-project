@@ -34,7 +34,7 @@ const List = (props) => {
     }, []);
 
     return (
-        <View>
+        <View style={{ backgroundColor: "#d9f7b0"}}>
             {loading ? (
                 <Spinner />
             ) : (

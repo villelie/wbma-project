@@ -27,7 +27,7 @@ const Single = (props) => {
     });
     return (
         <Container>
-            <Content>
+            <Content style={{backgroundColor: "#61ad5f"}}>
                 <Card>
                     <CardItem>
                         <Body>
@@ -67,7 +67,7 @@ const Single = (props) => {
                         <Body>
                             <Text note>Description:</Text>
                             <Text>{desc}</Text>
-                            <Text note>Rarity:</Text>
+                            <Text note>Conservation status:</Text>
                             <Text>{rari}</Text>
                             <Text note>Location:</Text>
                             <Text>{loca}</Text>
