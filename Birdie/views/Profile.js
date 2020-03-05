@@ -35,7 +35,7 @@ const Profile = (props) => {
         props.navigation.navigate('Auth');
     };
     return (
-        <Container>
+        <Container style={{backgroundColor: '#d9f7b0'}}>
             <Content>
                 <Card>
                     <CardItem>

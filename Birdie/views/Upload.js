@@ -58,7 +58,7 @@ const Upload = (props) => {
         }
     };
     return (
-        <Content>
+        <Content style={{backgroundColor: '#d9f7b0'}}>
             <Form>
                 <Item>
                     <FormTextInput
