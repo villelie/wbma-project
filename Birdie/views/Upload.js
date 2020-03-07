@@ -74,10 +74,9 @@ const Upload = (props) => {
                 <Card>
                     <Form>
                         <Item stackedLabel>
-                            <Label>Username</Label>
+                            <Label>Name of the bird</Label>
                             <FormTextInput
                                 value={inputs.title}
-                                placeholder='Name of the bird'
                                 onChangeText={handleTitleChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.title);
@@ -89,7 +88,6 @@ const Upload = (props) => {
                             <Label>Description</Label>
                             <FormTextInput
                                 value={inputs.description}
-                                placeholder='Description'
                                 onChangeText={handleDescriptionChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.description);
@@ -98,7 +96,7 @@ const Upload = (props) => {
                             />
                         </Item>
                         <Item picker>
-                            <Text>    Gender:</Text>
+                            <Text style={{color: '#545454', fontSize: 15}}>    Gender:</Text>
                             <Picker
                                 mode="dropdown"
                                 iosIcon={<Icon name="arrow-down" />}
@@ -113,7 +111,7 @@ const Upload = (props) => {
                             </Picker>
                         </Item>
                         <Item picker>
-                            <Text>    Conservation status:</Text>
+                            <Text style={{color: '#545454', fontSize: 15}}>    Conservation status:</Text>
                             <Picker
                                 mode="dropdown"
                                 iosIcon={<Icon name="arrow-down" />}
@@ -130,10 +128,9 @@ const Upload = (props) => {
                             </Picker>
                         </Item>
                         <Item stackedLabel>
-                            <Label>Location</Label>
+                            <Label>Location (city/zip/area)</Label>
                             <FormTextInput
                                 value={inputs.location}
-                                placeholder='Location (area/city/zip)'
                                 onChangeText={handleLocationChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.location);

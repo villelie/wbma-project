@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import AsyncImage from '../components/AsyncImage';
-import {Container, Content, Card, CardItem, Text, Body} from 'native-base';
+import {Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon} from 'native-base';
 import PropTypes from 'prop-types';
 import {Video} from 'expo-av';
 import {getUser} from '../hooks/APIHooks';
@@ -26,56 +26,70 @@ const Single = (props) => {
         getOwner();
     });
     return (
-        <Container>
-            <Content style={{backgroundColor: "#61ad5f"}}>
-                <Card>
-                    <CardItem>
-                        <Body>
-                            <Text>{file.title}</Text>
-                            <Text note>by {owner.username}</Text>
-                            {owner.full_name &&
-                                <Text note>{owner.full_name}</Text>
-                            }
-                        </Body>
-                    </CardItem>
-                    <CardItem cardBody>
-                        {file.media_type === 'image' &&
-                            <AsyncImage
-                                style={{
-                                    width: '100%',
-                                    height: deviceHeight / 2,
-                                }}
-                                spinnerColor='#777'
-                                source={{uri: mediaURL + file.filename}}
-                            />}
-                        {file.media_type === 'video' &&
-                            <Video
-                                source={{uri: mediaURL + file.filename}}
-                                rate={1.0}
-                                volume={1.0}
-                                isMuted={false}
-                                resizeMode="cover"
-                                shouldPlay
-                                isLooping
-                                style={{
-                                    width: '100%',
-                                    height: deviceHeight / 2
-                                }}
-                            />}
-                    </CardItem>
-                    <CardItem>
-                        <Body>
-                            <Text note>Description:</Text>
-                            <Text>{desc}</Text>
-                            <Text note>Conservation status:</Text>
-                            <Text>{rari}</Text>
-                            <Text note>Location:</Text>
-                            <Text>{loca}</Text>
-                        </Body>
-                    </CardItem>
-                </Card>
-            </Content>
-        </Container>
+        <>
+            <Header style={{backgroundColor: '#4FA345'}} androidStatusBarColor >
+                <Left>
+                    <Button transparent onPress={() => {props.navigation.navigate('Home')}}>
+                        <Icon name='arrow-back' />
+                    </Button>
+                </Left>
+                <Body>
+                    <Title>{file.title}</Title>
+                    <Subtitle>Birdie</Subtitle>
+                </Body>
+                <Right />
+            </Header>
+            <Container>
+                <Content style={{backgroundColor: "#d9f7b0"}}>
+                    <Card>
+                        <CardItem>
+                            <Body>
+                                <Text>{file.title}</Text>
+                                <Text note>by {owner.username}</Text>
+                                {owner.full_name &&
+                                    <Text note>{owner.full_name}</Text>
+                                }
+                            </Body>
+                        </CardItem>
+                        <CardItem cardBody>
+                            {file.media_type === 'image' &&
+                                <AsyncImage
+                                    style={{
+                                        width: '100%',
+                                        height: deviceHeight / 2,
+                                    }}
+                                    spinnerColor='#777'
+                                    source={{uri: mediaURL + file.filename}}
+                                />}
+                            {file.media_type === 'video' &&
+                                <Video
+                                    source={{uri: mediaURL + file.filename}}
+                                    rate={1.0}
+                                    volume={1.0}
+                                    isMuted={false}
+                                    resizeMode="cover"
+                                    shouldPlay
+                                    isLooping
+                                    style={{
+                                        width: '100%',
+                                        height: deviceHeight / 2
+                                    }}
+                                />}
+                        </CardItem>
+                        <CardItem>
+                            <Body>
+                                <Text note>Description:</Text>
+                                <Text>{desc}</Text>
+                                <Text note>Conservation status:</Text>
+                                <Text>{rari}</Text>
+                                <Text note>Location:</Text>
+                                <Text>{loca}</Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+                </Content>
+            </Container>
+        </>
     );
 };
 

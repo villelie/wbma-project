@@ -2,7 +2,7 @@
 import React from 'react';
 import List from '../components/List';
 import PropTypes from 'prop-types';
-import {Header, Left, Body, Right, Title, Subtitle} from 'native-base';
+import {Header, Container, Body, Right, Title, Subtitle} from 'native-base';
 
 
 const Home = (props) => {
@@ -16,7 +16,9 @@ const Home = (props) => {
                 </Body>
                 <Right />
             </Header>
-            <List navigation={navigation} mode={'all'}></List>
+            <Container style={{backgroundColor: '#d9f7b0'}}>
+                <List navigation={navigation} mode={'all'}></List>
+            </Container>
         </>
     );
 };
