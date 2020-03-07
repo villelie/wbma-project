@@ -87,6 +87,14 @@ const Single = (props) => {
                             </Body>
                         </CardItem>
                     </Card>
+                    {/*commentcard*/}
+                    <Card>
+                        <CardItem>
+                            <Body>
+                                <Text>This would be the place for comments. (views/Single.js, line 90)</Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
                 </Content>
             </Container>
         </>

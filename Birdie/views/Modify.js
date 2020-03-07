@@ -57,14 +57,13 @@ const Modify = (props) => {
                 </Body>
                 <Right />
             </Header>
-            <Content>
+            <Content style={{backgroundColor: '#d9f7b0'}}>
                 <Card>
                     <Form>
                         <Item stackedLabel>
-                            <Label>Username</Label>
+                            <Label>Name of the bird</Label>
                             <FormTextInput
                                 value={inputs.title}
-                                placeholder='Name of the bird'
                                 onChangeText={handleTitleChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.title);
@@ -76,7 +75,6 @@ const Modify = (props) => {
                             <Label>Description</Label>
                             <FormTextInput
                                 value={inputs.description}
-                                placeholder='Description'
                                 onChangeText={handleDescriptionChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.description);
@@ -85,6 +83,7 @@ const Modify = (props) => {
                             />
                         </Item>
                         <Item picker>
+                            <Text style={{color: '#545454', fontSize: 15}}>    Gender:</Text>
                             <Picker
                                 mode="dropdown"
                                 iosIcon={<Icon name="arrow-down" />}
@@ -93,12 +92,13 @@ const Modify = (props) => {
                                 placeholderIconColor="#007aff"
                                 selectedValue={sexPick}
                                 onValueChange={handleSexPicked.bind(this)}>
-                                <Picker.Item label="Male" value="Male" />
-                                <Picker.Item label="Female" value="Female" />
                                 <Picker.Item label="Unknown" value="Unknown" />
+                                <Picker.Item label="Female" value="Female" />
+                                <Picker.Item label="Male" value="Male" />
                             </Picker>
                         </Item>
                         <Item picker>
+                            <Text style={{color: '#545454', fontSize: 15}}>    Conservation status:</Text>
                             <Picker
                                 mode="dropdown"
                                 iosIcon={<Icon name="arrow-down" />}
@@ -107,6 +107,7 @@ const Modify = (props) => {
                                 placeholderIconColor="#007aff"
                                 selectedValue={rarityPick}
                                 onValueChange={handleRarityPicked.bind(this)}>
+                                <Picker.Item label="Unknown" value="Unknown" />
                                 <Picker.Item label="Least concern" value="Least concern" />
                                 <Picker.Item label="Near threatened" value="Near threatened" />
                                 <Picker.Item label="Vulnerable" value="Vulnerable" />
@@ -114,10 +115,9 @@ const Modify = (props) => {
                             </Picker>
                         </Item>
                         <Item stackedLabel>
-                            <Label>Location</Label>
+                            <Label>Location (city/zip/area)</Label>
                             <FormTextInput
                                 value={inputs.location}
-                                placeholder='Location (area/city/zip)'
                                 onChangeText={handleLocationChange}
                                 onEndEditing={() => {
                                     validateField(validationProperties.location);
@@ -125,10 +125,10 @@ const Modify = (props) => {
                                 error={errors.location}
                             />
                         </Item>
-                        <Button full onPress={() => {
+                        <Button success full onPress={() => {
                             modifyAsync(props.navigation);
                         }}>
-                            <Text>Upload</Text>
+                            <Text>Save changes</Text>
                         </Button>
 
                     </Form>
