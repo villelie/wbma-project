@@ -15,6 +15,7 @@ const Single = (props) => {
     const {navigation} = props;
     const [owner, setOwner] = useState({});
     const [comments, setComments] = useState([]);
+    const [userIdsToName, setUserIdsToName] = useState({});
     const file = navigation.state.params.file;
     const allData = JSON.parse(file.description);
     const desc = allData.description;
@@ -27,6 +28,12 @@ const Single = (props) => {
     const getCommentList = async () => {
         const com = await getComments(file.file_id);
         setComments(com);
+        //fetch all users details
+        const fetchedUsers = await Promise.all(com.map(({user_id}) => getUser(user_id)))
+        //set the user id state map
+        fetchedUsers.forEach(({user_id, username}) => {
+            setUserIdsToName({...userIdsToName, [user_id]: username })
+        });
     };
     useEffect(() => {
         getOwner();
@@ -98,6 +105,7 @@ const Single = (props) => {
                         <Card key={comment.comment_id}>
                             <CardItem>
                                 <Body>
+                                    <Text note>{userIdsToName[comment.user_id] || 'Anonymous'}</Text>
                                     <Text>{comment.comment}</Text>
                                 </Body>
                             </CardItem>
