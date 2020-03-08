@@ -5,7 +5,8 @@ import AsyncImage from '../components/AsyncImage';
 import {Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon} from 'native-base';
 import PropTypes from 'prop-types';
 import {Video} from 'expo-av';
-import {getUser} from '../hooks/APIHooks';
+import {getUser, getComments} from '../hooks/APIHooks';
+
 
 const deviceHeight = Dimensions.get('window').height;
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -13,6 +14,7 @@ const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const Single = (props) => {
     const {navigation} = props;
     const [owner, setOwner] = useState({});
+    const [comments, setComments] = useState([]);
     const file = navigation.state.params.file;
     const allData = JSON.parse(file.description);
     const desc = allData.description;
@@ -22,8 +24,13 @@ const Single = (props) => {
         const data = await getUser(file.user_id);
         setOwner(data);
     };
+    const getCommentList = async () => {
+        const com = await getComments(file.file_id);
+        setComments(com);
+    };
     useEffect(() => {
         getOwner();
+        getCommentList();
     });
     return (
         <>
@@ -87,14 +94,15 @@ const Single = (props) => {
                             </Body>
                         </CardItem>
                     </Card>
-                    {/*commentcard*/}
-                    <Card>
-                        <CardItem>
-                            <Body>
-                                <Text>This would be the place for comments. (views/Single.js, line 90)</Text>
-                            </Body>
-                        </CardItem>
-                    </Card>
+                    {comments.map(comment => (
+                        <Card key={comment.comment_id}>
+                            <CardItem>
+                                <Body>
+                                    <Text>{comment.comment}</Text>
+                                </Body>
+                            </CardItem>
+                        </Card>
+                    ))}
                 </Content>
             </Container>
         </>
