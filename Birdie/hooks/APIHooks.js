@@ -99,6 +99,15 @@ const getComments = async (id) => {
     }
 };
 
+const createComment = async (file_id, comment) => {
+    try{
+        const token = await AsyncStorage.getItem('userToken');
+        return await fetchPOST('comments', { file_id, comment }, token);
+    }catch (e) {
+        console.log(e.message);
+    }
+}
+
 const getUserMedia = async (token) => {
     const json = await fetchGET('media/user', '', token);
     const result = await Promise.all(json.map(async (item) => {
@@ -107,4 +116,4 @@ const getUserMedia = async (token) => {
     return result;
 };
 
-export {getAllMedia, fetchGET, fetchDEL, fetchPOST, fetchFormData, getUser, getUserMedia, getComments};
+export {getAllMedia, fetchGET, fetchDEL, fetchPOST, fetchFormData, getUser, getUserMedia, getComments, createComment};

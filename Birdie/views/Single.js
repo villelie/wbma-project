@@ -2,11 +2,11 @@
 import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import AsyncImage from '../components/AsyncImage';
-import {Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon} from 'native-base';
+import {View, Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon} from 'native-base';
 import PropTypes from 'prop-types';
 import {Video} from 'expo-av';
-import {getUser, getComments} from '../hooks/APIHooks';
-
+import {getUser, getComments, createComment} from '../hooks/APIHooks';
+import FormTextInput from '../components/FormTextInput';
 
 const deviceHeight = Dimensions.get('window').height;
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -14,6 +14,8 @@ const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const Single = (props) => {
     const {navigation} = props;
     const [owner, setOwner] = useState({});
+    const [newComment, setNewComment] = useState('');
+    const [sendingComment, setSendingComment] = useState(false);
     const [comments, setComments] = useState([]);
     const [userIdsToName, setUserIdsToName] = useState({});
     const file = navigation.state.params.file;
@@ -38,7 +40,7 @@ const Single = (props) => {
     useEffect(() => {
         getOwner();
         getCommentList();
-    });
+    }, []);
     return (
         <>
             <Header style={{backgroundColor: '#4FA345'}} androidStatusBarColor >
@@ -111,6 +113,27 @@ const Single = (props) => {
                             </CardItem>
                         </Card>
                     ))}
+                    <Card>
+                      <CardItem>
+                        <Body noleft>
+                            <Text note>New Comment</Text>
+                            <FormTextInput
+                                value={newComment}
+                                onChangeText={(text) => setNewComment(text)}
+                            />
+                        </Body>
+                        <Button success disabled={newComment == "" || sendingComment} onPress={async () => {
+                            console.log("sending", newComment)
+                            setSendingComment(true)
+                            await createComment(file.file_id, newComment);
+                            setNewComment("")
+                            await getCommentList()
+                            setSendingComment(false)
+                        }}>
+                            <Text>Send</Text>
+                        </Button>
+                      </CardItem>
+                    </Card>
                 </Content>
             </Container>
         </>
