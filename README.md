@@ -10,3 +10,4 @@ React-Native application to share media. Course project for Web Based Mobile App
 3. Run ```npm i``` inside ```/Birdie``` folder
 4. Run ```npm start```
 
+![](birdie.gif
