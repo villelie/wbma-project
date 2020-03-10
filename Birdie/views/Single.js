@@ -34,7 +34,7 @@ const Single = (props) => {
         const fetchedUsers = await Promise.all(com.map(({user_id}) => getUser(user_id)))
         //set the user id state map
         fetchedUsers.forEach(({user_id, username}) => {
-            setUserIdsToName({...userIdsToName, [user_id]: username })
+            setUserIdsToName({...userIdsToName, [user_id]: username})
         });
     };
     useEffect(() => {
@@ -103,36 +103,41 @@ const Single = (props) => {
                             </Body>
                         </CardItem>
                     </Card>
-                    {comments.map(comment => (
-                        <Card key={comment.comment_id}>
-                            <CardItem>
+                    <Card>
+                        <CardItem>
+                            <Body noleft>
+                                <Text note>Comments:</Text>
+                            </Body>
+                        </CardItem>
+                        {comments.map(comment => (
+                            <CardItem key={comment.comment_id}>
                                 <Body>
-                                    <Text note>{userIdsToName[comment.user_id] || 'Anonymous'}</Text>
                                     <Text>{comment.comment}</Text>
+                                    <Text note>by {userIdsToName[comment.user_id] || 'Anonymous'}</Text>
                                 </Body>
                             </CardItem>
-                        </Card>
-                    ))}
+                        ))}
+                    </Card>
                     <Card>
-                      <CardItem>
-                        <Body noleft>
-                            <Text note>New Comment</Text>
-                            <FormTextInput
-                                value={newComment}
-                                onChangeText={(text) => setNewComment(text)}
-                            />
-                        </Body>
-                        <Button success disabled={newComment == "" || sendingComment} onPress={async () => {
-                            console.log("sending", newComment)
-                            setSendingComment(true)
-                            await createComment(file.file_id, newComment);
-                            setNewComment("")
-                            await getCommentList()
-                            setSendingComment(false)
-                        }}>
-                            <Text>Send</Text>
-                        </Button>
-                      </CardItem>
+                        <CardItem>
+                            <Body noleft>
+                                <Text note>New Comment</Text>
+                                <FormTextInput
+                                    value={newComment}
+                                    onChangeText={(text) => setNewComment(text)}
+                                />
+                            </Body>
+                            <Button success disabled={newComment == "" || sendingComment} onPress={async () => {
+                                console.log("sending", newComment)
+                                setSendingComment(true)
+                                await createComment(file.file_id, newComment);
+                                setNewComment("")
+                                await getCommentList()
+                                setSendingComment(false)
+                            }}>
+                                <Icon name="send" />
+                            </Button>
+                        </CardItem>
                     </Card>
                 </Content>
             </Container>

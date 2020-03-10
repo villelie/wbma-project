@@ -20,7 +20,7 @@ const constraints = {
     },
 }
 
-const useUploadForm = (initialInputs) => {
+const useModifyForm = (initialInputs) => {
     const [inputs, setInputs] = useState(initialInputs || {});
     const [errors, setErrors] = useState({});
     const handleTitleChange = (text) => {
@@ -51,9 +51,9 @@ const useUploadForm = (initialInputs) => {
                 location: text,
             }));
     };
-    
+
     const validateField = (attr) => {
-        const copy = { ...attr };
+        const copy = {...attr};
         const attrName = Object.keys(copy).pop(); // get the only or last item from array
         const valResult = validate(copy, constraints);
         console.log('valresult', valResult);
@@ -68,7 +68,7 @@ const useUploadForm = (initialInputs) => {
                 fetch: undefined,
             }));
     };
-    
+
     const handleModify = async (navigation) => {
         const moreData = {
             description: inputs.description,
@@ -109,8 +109,8 @@ const useUploadForm = (initialInputs) => {
         }
 
         if (errors.title !== undefined ||
-            errors.description !== undefined 
-            ) {
+            errors.description !== undefined
+        ) {
             return false;
         } else {
             return true;
@@ -127,9 +127,9 @@ const useUploadForm = (initialInputs) => {
         inputs,
         errors,
         setErrors,
-        validateField
+        validateField,
     };
 };
 
-export default useUploadForm;
+export default useModifyForm;
 

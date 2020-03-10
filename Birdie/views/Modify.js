@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Content, Form, Item, Button, Body, Text, Picker, Icon, Card, Label, Header, Title, Subtitle, Right, Left} from 'native-base';
 import FormTextInput from '../components/FormTextInput';
-import useUploadForm from '../hooks/ModifyHooks';
+import useModifyForm from '../hooks/ModifyHooks';
 import PropTypes from 'prop-types';
 
 const Modify = (props) => {
@@ -20,7 +20,7 @@ const Modify = (props) => {
     };
     const {validateField, errors, validateOnSend, handleTitleChange,
         handleDescriptionChange, handleRarityChange,
-        handleLocationChange, handleModify, inputs} = useUploadForm({
+        handleLocationChange, handleModify, inputs} = useModifyForm({
             title: file.title,
             description: description.description,
             location: description.location,
