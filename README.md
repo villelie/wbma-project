@@ -1,5 +1,5 @@
 # Birdie
-## WBMA-Project
+## WBMA-Project 
 React-Native application to share media. Course project for Web Based Mobile Applications.
 - [Requirements](https://github.com/mattpe/wbma/blob/master/docs/project.md)
 - [BackEnd](http://media.mw.metropolia.fi/wbma/docs/)
@@ -10,4 +10,5 @@ React-Native application to share media. Course project for Web Based Mobile App
 3. Run ```npm i``` inside ```/Birdie``` folder
 4. Run ```npm start```
 
+### [https://expo.io/@villelie/birdie](https://expo.io/@villelie/birdie)
 ![](birdie.gif)
