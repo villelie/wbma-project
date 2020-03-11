@@ -26,9 +26,11 @@
     "androidStatusBar": {
       "backgroundColor": "#4FA345"
     },
-	"android": {
+    "android": {
       "package": "com.yourcompany.yourappname",
       "versionCode": 1
-    }
+    },
+    "description": "Project for Web based Mobile Applications -course by Daniel Finnerman, Ville Liekari,  I-En Wu",
+    "githubUrl": "https://github.com/villelie/wbma-project"
   }
 }

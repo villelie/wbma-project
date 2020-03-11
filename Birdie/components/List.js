@@ -55,11 +55,8 @@ const List = props => {
               handleSearchChange(searched);
               handleSearch(searched);
             }}
-            value={inputs.search}
           />
-          <Button success transparent>
-            <Icon name='search' />
-          </Button>
+          <Icon name='search' />
         </Item>
       </Card>
       {loading ? (
