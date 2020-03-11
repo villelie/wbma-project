@@ -9,8 +9,8 @@ const Modify = (props) => {
     const file = props.navigation.state.params.file
     const description = JSON.parse(file.description)
     console.log(file);
-    const [sexPick, setSexPicker] = useState('Male');
-    const [rarityPick, setRarityPicker] = useState('Least concern');
+    const [sexPick, setSexPicker] = useState('Unknown');
+    const [rarityPick, setRarityPicker] = useState('Unknown');
     const handleSexPicked = (value) => {
         handleSexChange(value);
         setSexPicker(value);

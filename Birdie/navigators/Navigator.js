@@ -21,21 +21,21 @@ const TabNavigator = createBottomTabNavigator(
     },
     {
         defaultNavigationOptions: ({navigation}) => ({
-            tabBarIcon: () => {
+            tabBarIcon: ({tintColor}) => {
                 const {routeName} = navigation.state;
                 let iconName;
                 if (routeName === 'Home') {
-                    iconName = 'home';
+                    iconName = 'list';
                 } else if (routeName === 'Profile') {
                     iconName = 'person';
                 } else if (routeName === 'Upload') {
-                    iconName = 'add';
+                    iconName = 'add-circle';
                 }
 
                 return <Icon
                     name={iconName}
                     size={25}
-                    color={'white'}
+                    style={{color: tintColor}}
                 />;
             },
         }),

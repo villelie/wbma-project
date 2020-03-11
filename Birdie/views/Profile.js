@@ -4,7 +4,7 @@ import {Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {Container, Content, Card, CardItem, Text, Button, Icon, Body, Header, Title, Subtitle, Right, } from 'native-base';
 import {fetchGET} from '../hooks/APIHooks';
-//import AsyncImage from '../components/AsyncImage';
+import AsyncImage from '../components/AsyncImage';
 
 const deviceHeight = Dimensions.get('window').height;
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -15,13 +15,14 @@ const Profile = (props) => {
         try {
             const userFromStorage = await AsyncStorage.getItem('user');
             const uData = JSON.parse(userFromStorage);
-            //Not using Avatars, since we dont have upload for it.
-            //const avatarPic = await fetchGET('tags', 'avatar_' + uData.user_id);
-            //console.log('aPic', avatarPic[0].filename);
+            // Avatar pic is just default styled profile picture uploaded with 
+            // that tag. Didnt have time to make new upload view for that.
+            const avatarPic = await fetchGET('tags', 'birdie_avatar');
+            console.log('aPic', avatarPic[0].filename);
             setUser((user) => (
                 {
                     userdata: uData,
-                    //avatar: avatarPic[0].filename,
+                    avatar: avatarPic[0].filename,
                 }));
         } catch (e) {
             console.log('Profile error: ', e.message);
@@ -52,18 +53,16 @@ const Profile = (props) => {
                                 <Text>{user.userdata.username}</Text>
                             </Body>
                         </CardItem>
-                        {/*
-                    <CardItem cardBody>
-                        <AsyncImage
-                            style={{
-                                width: '100%',
-                                height: deviceHeight / 2,
-                            }}
-                            spinnerColor='#777'
-                            source={{uri: mediaURL + user.avatar}}
-                        />
-                    </CardItem>
-                    */}
+                        <CardItem cardBody>
+                            <AsyncImage
+                                style={{
+                                    width: '100%',
+                                    height: deviceHeight / 4,
+                                }}
+                                spinnerColor='#777'
+                                source={{uri: mediaURL + user.avatar}}
+                            />
+                        </CardItem>
                         <CardItem>
                             <Body>
                                 <Text>Id: {user.userdata.user_id}</Text>

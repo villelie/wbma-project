@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import AsyncImage from '../components/AsyncImage';
-import {View, Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon} from 'native-base';
+import {View, Container, Content, Card, CardItem, Text, Body, Header, Title, Subtitle, Right, Left, Button, Icon, Item} from 'native-base';
 import PropTypes from 'prop-types';
 import {Video} from 'expo-av';
 import {getUser, getComments, createComment} from '../hooks/APIHooks';
@@ -105,15 +105,15 @@ const Single = (props) => {
                     </Card>
                     <Card>
                         <CardItem>
-                            <Body noleft>
-                                <Text note>Comments:</Text>
+                            <Body>
+                                <Text note>Comments</Text>
                             </Body>
                         </CardItem>
                         {comments.map(comment => (
                             <CardItem key={comment.comment_id}>
                                 <Body>
+                                    <Text note>{userIdsToName[comment.user_id] || 'Anonymous'}</Text>
                                     <Text>{comment.comment}</Text>
-                                    <Text note>by {userIdsToName[comment.user_id] || 'Anonymous'}</Text>
                                 </Body>
                             </CardItem>
                         ))}
@@ -121,8 +121,8 @@ const Single = (props) => {
                     <Card>
                         <CardItem>
                             <Body noleft>
-                                <Text note>New Comment</Text>
                                 <FormTextInput
+                                    placeholder={'New comment'}
                                     value={newComment}
                                     onChangeText={(text) => setNewComment(text)}
                                 />

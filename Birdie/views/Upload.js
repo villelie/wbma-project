@@ -52,8 +52,8 @@ const Upload = (props) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
-            quality: 0.1,
+            aspect: [1, 1],
+            quality: 0.5,
             exif: true,
         });
         console.log(result);

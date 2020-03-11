@@ -79,7 +79,6 @@ const useUploadForm = () => {
     };
 
     const handleUpload = async (file, navigation) => {
-
         const filename = file.uri.split('/').pop();
         const match = /\.(\w+)$/.exec(filename);
         let type = match ? `image/${match[1]}` : `image`;
@@ -140,9 +139,7 @@ const useUploadForm = () => {
             validateField(value);
         }
 
-        if (errors.title !== undefined ||
-            errors.description !== undefined
-        ) {
+        if (errors.title !== undefined || errors.description !== undefined) {
             return false;
         } else {
             return true;
